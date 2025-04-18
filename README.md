@@ -7,7 +7,7 @@ This project investigates the use of deep learning models to classify human acti
 - **Walking**
 - **Bending**
 
-We use both lab-collected and public IMU datasets to train and evaluate models, with a long-term goal of deploying on edge devices.
+We use lab-collected IMU datasets to train and evaluate models, with a long-term goal of deploying on edge devices.
 
 ---
 
