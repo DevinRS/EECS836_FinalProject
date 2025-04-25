@@ -1,0 +1,26 @@
+==========================
+⚙️ Training LogisticRegression...
+==========================
+==========================
+⚙️ Training SVC...
+==========================
+==========================
+⚙️ Training RandomForestClassifier...
+==========================
+==========================
+⚙️ Training XGBClassifier...
+==========================
+/home/devin/hdd_folder/School/EECS836_FinalProject/EECS836_FinalProject/.venv/lib/python3.12/site-packages/xgboost/training.py:183: UserWarning: [16:59:06] WARNING: /workspace/src/learner.cc:738: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+💾 LogisticRegression size: 0.00 MB
+💾 SVM size: 1.06 MB
+💾 RandomForest size: 19.97 MB
+💾 XGBoost size: 1.37 MB
+
+📦 Model Sizes:
+Logistic Regression → Size: 0.00 MB
+SVM                 → Size: 1.06 MB
+Random Forest       → Size: 19.97 MB
+XGBoost             → Size: 1.37 MB
