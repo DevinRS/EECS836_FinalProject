@@ -1,0 +1,77 @@
+==========================
+⚙️ Training LogisticRegression...
+==========================
+              precision    recall  f1-score   support
+
+           1       0.94      0.99      0.97       496
+           2       0.97      0.94      0.96       471
+           3       0.99      0.97      0.98       420
+           4       0.97      0.88      0.92       491
+           5       0.90      0.98      0.94       532
+           6       1.00      1.00      1.00       537
+
+    accuracy                           0.96      2947
+   macro avg       0.96      0.96      0.96      2947
+weighted avg       0.96      0.96      0.96      2947
+
+==========================
+⚙️ Training SVC...
+==========================
+              precision    recall  f1-score   support
+
+           1       0.94      0.98      0.96       496
+           2       0.93      0.96      0.94       471
+           3       0.99      0.91      0.95       420
+           4       0.94      0.89      0.91       491
+           5       0.91      0.95      0.93       532
+           6       1.00      1.00      1.00       537
+
+    accuracy                           0.95      2947
+   macro avg       0.95      0.95      0.95      2947
+weighted avg       0.95      0.95      0.95      2947
+
+==========================
+⚙️ Training RandomForestClassifier...
+==========================
+              precision    recall  f1-score   support
+
+           1       0.89      0.97      0.93       496
+           2       0.88      0.89      0.89       471
+           3       0.97      0.86      0.91       420
+           4       0.91      0.90      0.90       491
+           5       0.91      0.92      0.91       532
+           6       1.00      1.00      1.00       537
+
+    accuracy                           0.93      2947
+   macro avg       0.93      0.92      0.92      2947
+weighted avg       0.93      0.93      0.93      2947
+
+==========================
+⚙️ Training XGBClassifier...
+==========================
+/home/devin/hdd_folder/School/EECS836_FinalProject/EECS836_FinalProject/.venv/lib/python3.12/site-packages/xgboost/training.py:183: UserWarning: [10:12:35] WARNING: /workspace/src/learner.cc:738: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+              precision    recall  f1-score   support
+
+           0       0.93      0.98      0.95       496
+           1       0.93      0.93      0.93       471
+           2       0.96      0.91      0.94       420
+           3       0.94      0.86      0.90       491
+           4       0.89      0.95      0.92       532
+           5       1.00      1.00      1.00       537
+
+    accuracy                           0.94      2947
+   macro avg       0.94      0.94      0.94      2947
+weighted avg       0.94      0.94      0.94      2947
+
+
+📊 Final Results:
+Logistic Regression → Accuracy: 0.96
+SVM                 → Accuracy: 0.95
+Random Forest       → Accuracy: 0.93
+XGBoost             → Accuracy: 0.94
+==========================
+Visualization saved as 'phase1_uci_dataset/figures/model_accuracies.png'
+==========================

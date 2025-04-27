@@ -1,0 +1,24 @@
+==========================
+📝 Dataset Information:
+==========================
+Number of training samples: 7352
+Number of test samples: 2947
+Number of features: 12
+Number of subjects: 21
+Number of classes: 6
+
+
+
+==========================
+Visualization saved as 'phase2_uci_minimal/figures/class_distribution.png'
+==========================
+
+
+==========================
+Visualization saved as 'phase2_uci_minimal/figures/pca.png'
+==========================
+
+
+==========================
+Visualization saved as 'phase2_uci_minimal/figures/tsne.png'
+==========================
