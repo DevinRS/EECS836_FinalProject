@@ -1,0 +1,30 @@
+Loading 01_train_lower_labeled.csv...
+Loading 01_train_upper_labeled.csv...
+📚 Label mapping:
+0: Unknown
+1: bending
+2: walking
+==========================
+📝 Dataset Information:
+==========================
+Number of training samples: 1477
+Number of test samples: 370
+Number of features: 24
+Number of subjects: 1
+Number of classes: 3
+
+
+
+==========================
+Visualization saved as 'phase3_lab_data/figures/class_distribution.png'
+==========================
+
+
+==========================
+Visualization saved as 'phase3_lab_data/figures/pca.png'
+==========================
+
+
+==========================
+Visualization saved as 'phase3_lab_data/figures/tsne.png'
+==========================

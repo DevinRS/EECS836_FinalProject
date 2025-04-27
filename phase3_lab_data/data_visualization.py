@@ -1,49 +1,45 @@
-import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+from utils.loader import preprocess_lab_data
+from utils.plotting import visualize_class_distribution, visualize_dataset_2D
 
-# Import the data from 'Labeled/01_train_lower_labeled.csv' and 'Labeled/01_train_upper_labeled.csv'
-lower_labeled = pd.read_csv('Labeled/01_train_lower_labeled.csv')
-upper_labeled = pd.read_csv('Labeled/01_train_upper_labeled.csv')
+# Pretty print the dataset information: number of samples, number of features, number of subjects, number of classes
+def pretty_print_dataset_info(data):
+    print("==========================")
+    print("📝 Dataset Information:")
+    print("==========================")
+    print(f"Number of training samples: {data['X_train'].shape[0]}")
+    print(f"Number of test samples: {data['X_test'].shape[0]}")
+    print(f"Number of features: {data['X_train'].shape[1]}")
+    print(f"Number of subjects: {len(np.unique(data['subject_train']))}")
+    print(f"Number of classes: {len(np.unique(data['y_train']))}")
+    print("\n\n")
 
-# print the number of rows and columns in the data
-print(f"Lower Labeled Data: {lower_labeled.shape[0]} rows, {lower_labeled.shape[1]} columns")
-print(f"Upper Labeled Data: {upper_labeled.shape[0]} rows, {upper_labeled.shape[1]} columns")
+df = preprocess_lab_data(base_path="Labeled", window_size=128, step_size=64, save_path=None)
+Y = df['Task']
+X = df.drop(columns=['Task'])
+# Encode the labels
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+Y = le.fit_transform(Y)
+# print the label mapping
+print("📚 Label mapping:")
+for i, label in enumerate(le.classes_):
+    print(f"{i}: {label}")
+# Split the data into training and testing sets making sure to keep the same ratio of classes in both sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, stratify=Y, random_state=42)
 
-# drop Var1
-lower_labeled = lower_labeled.drop(columns=['Var1'])
-upper_labeled = upper_labeled.drop(columns=['Var1'])
-# print the first few rows of the data
-print(lower_labeled.head())
-print(upper_labeled.head())
-print(lower_labeled.tail())
-print(upper_labeled.tail())
+data = {
+    "X_train": X_train.to_numpy(),
+    "y_train": y_train,
+    "subject_train": None,
+    "X_test": X_test.to_numpy(),
+    "y_test": y_test,
+    "subject_test": None,
+}
 
-# Replace the missing values in 'Task' with 'Unknown'
-lower_labeled['Task'] = lower_labeled['Task'].fillna('Unknown')
-upper_labeled['Task'] = upper_labeled['Task'].fillna('Unknown')
+label_map = {i: label for i, label in enumerate(le.classes_)}
 
-# Plot the distribution of the 'Task' column in both datasets on the same figure side by side
-def plot_task_distribution(lower_labeled, upper_labeled):
-    plt.figure(figsize=(12, 6))
-
-    # Plot for lower_labeled
-    plt.subplot(1, 2, 1)
-    sns.countplot(data=lower_labeled, x='Task', order=lower_labeled['Task'].value_counts().index)
-    plt.title('Lower Labeled Task Distribution')
-    plt.xticks(rotation=45)
-
-    # Plot for upper_labeled
-    plt.subplot(1, 2, 2)
-    sns.countplot(data=upper_labeled, x='Task', order=upper_labeled['Task'].value_counts().index)
-    plt.title('Upper Labeled Task Distribution')
-    plt.xticks(rotation=45)
-
-    plt.tight_layout()
-    plt.savefig('phase3_lab_data/figures/task_distribution.png')
-
-plot_task_distribution(lower_labeled, upper_labeled)
-
-
-
+pretty_print_dataset_info(data)
+visualize_class_distribution(data['y_train'], data['y_test'], label_map, save_path="phase3_lab_data/figures")
+visualize_dataset_2D(data['X_train'], data['y_train'], label_map, save_path="phase3_lab_data/figures")

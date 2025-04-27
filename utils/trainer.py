@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 # This function trains a given model on the training data and evaluates it on the test data.
 # It prints the classification report and confusion matrix, and saves the confusion matrix plot if a save path is provided.
 # It returns the accuracy of the model on the test data.
-def train_and_evaluate_model(model, X_train, y_train, X_test, y_test, evaluate=True, save_path=None):
+def train_and_evaluate_model(model, X_train, y_train, X_test, y_test, evaluate=True, save_path=None, remap=True):
     # get model name
     model_name = model.__class__.__name__
     print("==========================")
@@ -17,7 +17,7 @@ def train_and_evaluate_model(model, X_train, y_train, X_test, y_test, evaluate=T
     print("==========================")
 
     # adjustment for xgboost
-    if model_name == "XGBClassifier":
+    if model_name == "XGBClassifier" and remap:
         y_test = y_test - 1
         y_train = y_train - 1
 
