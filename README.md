@@ -65,7 +65,9 @@ export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 ```
 On Windows Command Prompt, use:
 ```bash 
-set PYTHONPATH=%PYTHONPATH%;%cd%
+set PYTHONPATH=%PYTHONPATH%;%cd% 
+# or for Powershell use:
+$env:PYTHONPATH = "$env:PYTHONPATH;$PWD"
 ```
 
 ---
@@ -109,5 +111,25 @@ python phase3_lab_data/simple_models.py
 
 ✅ All code should be run from the root directory (EECS836_FinalProject), so relative imports and file paths work properly.
 
+---
 
+# 🛠️ Methodology
+
+## 📊 Approach I: Heavy Preprocessing with Traditional Machine Learning Models (UCI Dataset)
+### Description: 
+The first approach highlights the heavily preprocessed dataset from the Human Activity Recognition Using Smartphones (UCI dataset). The experiments were carried out with a group of 30 volunteers aged 19–48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) while wearing a smartphone (Samsung Galaxy S II) on their waist.
+
+Using the smartphone’s embedded accelerometer and gyroscope, 3-axial linear acceleration and 3-axial angular velocity were captured at a constant rate of 50 Hz. The experiments were video-recorded to manually label the data. The obtained dataset was randomly partitioned, with 70% of volunteers for training data and 30% for test data.
+
+The sensor signals were pre-processed by applying noise filters and sampled into fixed-width sliding windows of 2.56 seconds with 50% overlap (128 readings per window). To separate body motion and gravitational components, a Butterworth low-pass filter (0.3 Hz cutoff) was applied. From each window, a feature vector was created by extracting variables from both the time and frequency domains.
+
+## ✂️ Approach II: Minimal Preprocessing with Traditional Machine Learning Models (UCI Minimal and Lab Dataset)
+### Description:
+In this approach, we use minimal preprocessing on the datasets. For the UCI dataset, only the mean and standard deviation of the gyroscope and accelerometer signals along the x, y, and z axes are calculated (resulting in 12 features total).
+
+Similarly, for the Lab dataset, minimal preprocessing is applied after sliding window segmentation.
+
+## 🤖 Approach III: No Preprocessing with 1D Convolutional Neural Networks (Lab Dataset)
+### Description:
+TO BE ADDED
 
