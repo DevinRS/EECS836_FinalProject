@@ -106,6 +106,7 @@ python phase3_lab_data/simple_models.py
 # (If 'python' does not work, try 'python3')
 ```
 ✅ Make sure you have already run the environment setup steps and have the correct dependencies installed.
+
 ✅ All code should be run from the root directory (EECS836_FinalProject), so relative imports and file paths work properly.
 
 
