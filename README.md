@@ -42,7 +42,7 @@ We use lab-collected IMU datasets to train and evaluate models, with a long-term
 
 # 📕 Tutorial
 
-## 1. Environment Setup
+## 1. Environment Setup 🐍
 You can use either Conda or venv to set up Python 3.12.3.
 ### Using Conda
 ```bash 
@@ -70,7 +70,7 @@ set PYTHONPATH=%PYTHONPATH%;%cd%
 
 ---
 
-## 2. Running the code
+## 2. Running the code 🏃
 The project is organized as follows:
 ### File structure
 ```plaintext
