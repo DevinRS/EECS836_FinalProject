@@ -103,7 +103,7 @@ def preprocess_lab_data(base_path="Labeled", window_size=128, step_size=64, save
         df = sliding_window(df, window_size=window_size, step_size=step_size)
 
         # add suffix
-        if i == 0:
+        if i == 0 or i == 2:
             suffix = '_lower'
         else:
             suffix = '_upper'
@@ -119,15 +119,37 @@ def preprocess_lab_data(base_path="Labeled", window_size=128, step_size=64, save
             print(f"DataFrame {i} shape after sliding window: {dataframes[i].shape}")
             print(f"DataFrame {i} head after sliding window: {dataframes[i].head()}")
 
-    # Do inner join on all dataframes based on index columns
+    # # Do inner join on all dataframes based on index columns
+    # if save_path:
+    #     print("Merging dataframes...")
+    # merged_df = pd.concat(dataframes, axis=1, join='inner')
+    # # Drop the last columns (duplicate 'Task' columns)
+    # merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
+    # if save_path:
+    #     print(f"Merged DataFrame shape: {merged_df.shape}")
+    #     print(f"Merged DataFrame head: {merged_df.head()}")
+
+
+    # Now merge first two dataframes (index 0 and 1)
     if save_path:
-        print("Merging dataframes...")
-    merged_df = pd.concat(dataframes, axis=1, join='inner')
-    # Drop the last columns (duplicate 'Task' columns)
-    merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
+        print("Merging first two dataframes...")
+    merged1 = pd.concat([dataframes[0], dataframes[1]], axis=1, join='inner')
+    merged1 = merged1.loc[:, ~merged1.columns.duplicated()]
+
+    # Merge second two dataframes (index 2 and 3)
     if save_path:
-        print(f"Merged DataFrame shape: {merged_df.shape}")
-        print(f"Merged DataFrame head: {merged_df.head()}")
+        print("Merging second two dataframes...")
+    merged2 = pd.concat([dataframes[2], dataframes[3]], axis=1, join='inner')
+    merged2 = merged2.loc[:, ~merged2.columns.duplicated()]
+
+    # Finally, concatenate merged1 and merged2 row-wise
+    if save_path:
+        print("Concatenating merged dataframes...")
+    merged_df = pd.concat([merged1, merged2], axis=0).reset_index(drop=True)
+
+    if save_path:
+        print(f"Final merged DataFrame shape: {merged_df.shape}")
+        print(f"Final merged DataFrame head: {merged_df.head()}")
 
     # Save the merged dataframe to a csv file
     if save_path:

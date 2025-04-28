@@ -1,7 +1,7 @@
 from utils.loader import preprocess_lab_data
 
 # Load the dataset
-df = preprocess_lab_data(base_path="Labeled", window_size=128, step_size=64, save_path="phase3_lab_data/dataset")
+df = preprocess_lab_data(base_path="Labeled", window_size=128, step_size=16, save_path="phase3_lab_data/dataset")
 # y = df['Task']
 # X = df.drop(columns=['Task'])
 # # Encode the labels
