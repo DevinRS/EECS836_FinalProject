@@ -14,7 +14,7 @@ from utils.trainer import train_and_evaluate_model
 
 # Load dataset
 # df = preprocess_lab_data(base_path="Labeled", window_size=128, step_size=16, save_path=None)
-df = pd.read_csv("phase3_lab_data/dataset/lab_W128_S16.csv")
+df = pd.read_csv("phase3_lab_data/dataset/lab_W128_S64.csv")
 Y = df['Task']
 X = df.drop(columns=['Task'])
 # Encode the labels

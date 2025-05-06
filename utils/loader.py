@@ -119,17 +119,6 @@ def preprocess_lab_data(base_path="Labeled", window_size=128, step_size=64, save
             print(f"DataFrame {i} shape after sliding window: {dataframes[i].shape}")
             print(f"DataFrame {i} head after sliding window: {dataframes[i].head()}")
 
-    # # Do inner join on all dataframes based on index columns
-    # if save_path:
-    #     print("Merging dataframes...")
-    # merged_df = pd.concat(dataframes, axis=1, join='inner')
-    # # Drop the last columns (duplicate 'Task' columns)
-    # merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
-    # if save_path:
-    #     print(f"Merged DataFrame shape: {merged_df.shape}")
-    #     print(f"Merged DataFrame head: {merged_df.head()}")
-
-
     # Now merge first two dataframes (index 0 and 1)
     if save_path:
         print("Merging first two dataframes...")

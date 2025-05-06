@@ -125,11 +125,135 @@ The sensor signals were pre-processed by applying noise filters and sampled into
 
 ## ✂️ Approach II: Minimal Preprocessing with Traditional Machine Learning Models (UCI Minimal and Lab Dataset)
 ### Description:
-In this approach, we use minimal preprocessing on the datasets. For the UCI dataset, only the mean and standard deviation of the gyroscope and accelerometer signals along the x, y, and z axes are calculated (resulting in 12 features total).
 
-Similarly, for the Lab dataset, minimal preprocessing is applied after sliding window segmentation.
+In this approach, we apply minimal preprocessing to both the UCI and Lab datasets to retain simplicity and interpretability.
 
-## 🤖 Approach III: No Preprocessing with 1D Convolutional Neural Networks (Lab Dataset)
-### Description:
-TO BE ADDED
+1. For the UCI dataset, we extract only basic statistical features — the mean and standard deviation — from the gyroscope and accelerometer signals along the x, y, and z axes, resulting in a total of 12 features. This keeps the feature set compact and focused on key signal characteristics.
 
+2. For the Lab dataset, a similar philosophy is applied. After performing sliding window segmentation, we extract minimal features without heavy transformations or feature engineering.
+
+### Motivation:
+
+The rationale behind this minimal approach is rooted in the nature of our Lab dataset, which involves classifying only three activities: bending, walking, and other. Because the classification problem is relatively simple and well-separated, complex preprocessing may not be necessary — and could even introduce noise or overfitting. Using a small, informative set of features allows traditional machine learning models to perform effectively while remaining efficient and easier to interpret.
+
+---
+
+# 🚀 Results
+
+## Phase I: UCI Dataset IMU Classification (Approach I)
+
+## 📊 Data Visualization
+![pca](phase1_uci_dataset/figures/pca.png) 
+### Figure 1: PCA projection of IMU signals on UCI Dataset Phase I
+![tsne](phase1_uci_dataset/figures/tsne.png)
+### Figure 2: t-SNE projection of IMU signals on UCI Dataset Phase I
+![distribution](phase1_uci_dataset/figures/class_distribution.png)
+### Figure 3: Class Distribution of UCI Dataset Phase I
+
+## 📋 Confusion Matrices
+Below we show the confusion matrix for the best-performing model, **Logistic Regression**, on the UCI dataset. All other confusion matrices from the evaluated models are available in `phase1_uci_dataset/figures`.
+
+![phase1_LR](phase1_uci_dataset/figures/confusion_matrix_LogisticRegression.png)
+### Figure 4: Confusion Matrix for Best Model on UCI Dataset Phase I
+
+## 🎯 Model Accuracies
+
+![phase1_acc](phase1_uci_dataset/figures/model_accuracies.png)
+### Figure 5: Model Accuracies on UCI Dataset Phase I
+
+## 📦 Model Sizes
+
+![phase1_sizes](phase1_uci_dataset/figures/model_sizes.png)
+### Figure 6: Model Sizes on UCI Dataset Phase I
+
+📦 Model Sizes:<br>
+Logistic Regression → Size: 27.21 KB <br>
+SVM                 → Size: 9949.67 KB<br>
+Random Forest       → Size: 5809.88 KB<br>
+XGBoost             → Size: 675.05 KB<br>
+
+## Conclusion
+Traditional machine learning models demonstrated outstanding performance in classifying IMU signals from the UCI dataset. We suspect that this strong performance is largely driven by the extensive preprocessing pipeline—particularly the use of techniques like Fast Fourier Transform (FFT)—which helps extract informative features from the raw signals.
+
+However, despite the small size of the best-performing model (Logistic Regression, ~27 KB), the feasibility of deploying this approach on edge devices remains uncertain. The computational cost and memory requirements of the preprocessing steps may outweigh the model’s lightweight size. Future work should rigorously investigate the hardware requirements—such as RAM, flash memory, and processor specifications—necessary to run this pipeline in real-time on embedded or wearable systems.
+
+---
+
+## Phase II: UCI Dataset IMU Classification (Approach II)
+
+## 📊 Data Visualization
+![pca2](phase2_uci_minimal/figures/pca.png) 
+### Figure 7: PCA projection of IMU signals on UCI Dataset Phase II
+![tsne2](phase2_uci_minimal/figures/tsne.png)
+### Figure 8: t-SNE projection of IMU signals on UCI Dataset Phase II
+![distribution2](phase2_uci_minimal/figures/class_distribution.png)
+### Figure 9: Class Distribution of UCI Dataset Phase II
+
+## 📋 Confusion Matrices
+Below we show the confusion matrix for the best-performing model, **XGBoost**, on the UCI dataset. All other confusion matrices from the evaluated models are available in `phase2_uci_minimal/figures`.
+
+![phase2_XG](phase2_uci_minimal/figures/confusion_matrix_XGBClassifier.png)
+### Figure 10: Confusion Matrix for Best Model on UCI Dataset Phase II
+
+## 🎯 Model Accuracies
+
+![phase2_acc](phase2_uci_minimal/figures/model_accuracies.png)
+### Figure 11: Model Accuracies on UCI Dataset Phase II
+
+## 📦 Model Sizes
+
+![phase2_sizes](phase2_uci_minimal/figures/model_sizes.png)
+### Figure 12: Model Sizes on UCI Dataset Phase II
+
+📦 Model Sizes:<br>
+Logistic Regression → Size: 1.48 KB<br>
+SVM                 → Size: 992.88 KB<br>
+Random Forest       → Size: 20383.43 KB<br>
+XGBoost             → Size: 1413.07 KB<br>
+
+## Conclusion
+In this phase, we evaluated traditional machine learning models on the UCI dataset using only simple preprocessing (mean and standard deviation of IMU signals). As expected, this led to a significant drop in accuracy—highlighting the importance of feature engineering. The best-performing model, **XGBoost**, achieved an accuracy of **81%**, a notable decrease from **96%** achieved by Logistic Regression in Phase I with heavy preprocessing.
+
+An interesting observation is the large increase in model size for tree-based algorithms. Both **Random Forest** and **XGBoost** became substantially larger, which we believe is inherent to their structure—when presented with less informative features, they likely need to build more trees to maintain performance. In contrast, **SVM** and **Logistic Regression** remained compact.
+
+From an edge deployment perspective, this minimal preprocessing approach is highly promising. Both **Logistic Regression** and **XGBoost** models remain under **1 MB**, and the lightweight preprocessing (mean and std) can be easily executed with devices having **<512 KB RAM** and **<2 MB flash memory**. This makes the approach viable for real-time, low-power embedded systems.
+
+---
+
+## Phase III: UCI Dataset IMU Classification (Approach II)
+
+## 📊 Data Visualization
+![pca3](phase3_lab_data/figures/pca.png) 
+### Figure 13: PCA projection of IMU signals on Lab Dataset
+![tsne3](phase3_lab_data/figures/tsne.png)
+### Figure 14: t-SNE projection of IMU signals on Lab Dataset
+![distribution3](phase3_lab_data/figures/class_distribution.png)
+### Figure 15: Class Distribution of Lab Dataset
+
+## 📋 Confusion Matrices
+Below we show the confusion matrix for the best-performing model, **XGBoost**, on the UCI dataset. All other confusion matrices from the evaluated models are available in `phase3_lab_data/figures`.
+
+![phase3_XG](phase3_lab_data/figures/confusion_matrix_XGBClassifier.png)
+### Figure 16: Confusion Matrix for Best Model on Lab Dataset
+
+## 🎯 Model Accuracies
+
+![phase3_acc](phase3_lab_data/figures/model_accuracies.png)
+### Figure 17: Model Accuracies on Lab Dataset
+
+## 📦 Model Sizes
+
+![phase3_sizes](phase3_lab_data/figures/model_sizes.png)
+### Figure 18: Model Sizes on Lab Dataset
+
+📦 Model Sizes:<br>
+Logistic Regression → Size: 1.44 KB<br>
+SVM                 → Size: 329.86 KB<br>
+Random Forest       → Size: 5340.00 KB<br>
+XGBoost             → Size: 650.00 KB<br>
+
+## Conclusion
+
+Building on the promising results from the UCI dataset using minimal preprocessing, we applied the same strategy to our Lab dataset. The outcome was encouraging: **XGBoost** achieved an improved accuracy of 86%, up from 81% in the previous phase. This performance gain is likely due to the reduced complexity of our classification task, which involves only **3 activity classes** compared to 6 in the UCI dataset. Tree-based models like XGBoost appear to thrive even with limited, simple features under such conditions.
+
+Interestingly, model sizes also **shrank**, despite our Lab dataset including **twice as many features** (both upper and lower body IMU data). This supports our earlier observations about the behavior of tree-based models and strengthens the case for deploying this pipeline on edge devices. With **minimal preprocessing** and a compact XGBoost model, 86% accuracy is achievable even on **microcontrollers with <1MB flash**, making this approach highly practical for real-world, resource-constrained applications.

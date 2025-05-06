@@ -1,5 +1,3 @@
-Loading 01_train_lower_labeled.csv...
-Loading 01_train_upper_labeled.csv...
 📚 Label mapping:
 0: Unknown
 1: bending
@@ -16,17 +14,17 @@ Loading 01_train_upper_labeled.csv...
 ==========================
 ⚙️ Training XGBClassifier...
 ==========================
-/home/devin/hdd_folder/School/EECS836_FinalProject/EECS836_FinalProject/.venv/lib/python3.12/site-packages/xgboost/training.py:183: UserWarning: [11:14:28] WARNING: /workspace/src/learner.cc:738: 
+/home/devin/hdd_folder/School/EECS836_FinalProject/EECS836_FinalProject/.venv/lib/python3.12/site-packages/xgboost/training.py:183: UserWarning: [16:28:24] WARNING: /workspace/src/learner.cc:738: 
 Parameters: { "use_label_encoder" } are not used.
 
   bst.update(dtrain, iteration=i, fobj=obj)
 💾 LogisticRegression size: 1.44 KB
-💾 SVM size: 161.75 KB
-💾 RandomForest size: 2618.53 KB
-💾 XGBoost size: 510.81 KB
+💾 SVM size: 329.86 KB
+💾 RandomForest size: 5340.00 KB
+💾 XGBoost size: 650.00 KB
 
 📦 Model Sizes:
 Logistic Regression → Size: 1.44 KB
-SVM                 → Size: 161.75 KB
-Random Forest       → Size: 2618.53 KB
-XGBoost             → Size: 510.81 KB
+SVM                 → Size: 329.86 KB
+Random Forest       → Size: 5340.00 KB
+XGBoost             → Size: 650.00 KB

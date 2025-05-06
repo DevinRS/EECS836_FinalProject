@@ -1,5 +1,9 @@
 Loading 01_train_lower_labeled.csv...
 Loading 01_train_upper_labeled.csv...
+Loading 05_train_lower_labeled.csv...
+Loading 05_train_upper_labeled.csv...
+/mnt/my_hdd/devin_data/School/EECS836_FinalProject/EECS836_FinalProject/utils/loader.py:80: DtypeWarning: Columns (7) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(file_path)
 📚 Label mapping:
 0: Unknown
 1: bending
@@ -7,8 +11,8 @@ Loading 01_train_upper_labeled.csv...
 ==========================
 📝 Dataset Information:
 ==========================
-Number of training samples: 1477
-Number of test samples: 370
+Number of training samples: 3072
+Number of test samples: 769
 Number of features: 24
 Number of subjects: 1
 Number of classes: 3
@@ -28,3 +32,4 @@ Visualization saved as 'phase3_lab_data/figures/pca.png'
 ==========================
 Visualization saved as 'phase3_lab_data/figures/tsne.png'
 ==========================
+
